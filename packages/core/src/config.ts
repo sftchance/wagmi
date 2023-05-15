@@ -30,6 +30,7 @@ export type CreateConfigParameters<TChain extends readonly Chain[]> = {
 } & (
   | {
       chains: TChain
+      pollingInterval?: number
       transports: Record<TChain[number]['id'], Transport>
     }
   | {
@@ -185,7 +186,9 @@ export function createConfig<const TChain extends readonly Chain[]>({
           : rest.publicClient
     else
       publicClient = createPublicClient({
+        batch: { multicall: true },
         chain,
+        pollingInterval: rest.pollingInterval as number,
         transport: rest.transports[chain.id as TChain[number]['id']],
       })
 

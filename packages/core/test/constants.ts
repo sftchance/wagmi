@@ -1,3 +1,6 @@
+import type { Chain } from '../src/chain.js'
+import { mainnet } from '@wagmi/chains'
+
 export const chainId = 123
 export const port = 8545
 
@@ -24,6 +27,35 @@ export const accounts = [
 
 // Named accounts
 export const [ALICE, BOB] = accounts
+
+const forkChain = {
+  ...mainnet, // We are using a mainnet fork for testing.
+  id: chainId,
+  rpcUrls: {
+    // These rpc urls are automatically used in the transports.
+    default: {
+      // Note how we append the worker id to the local rpc urls.
+      http: [`http://127.0.0.1:${port}/${pool}`],
+      webSocket: [`ws://127.0.0.1:${port}/${pool}`],
+    },
+    public: {
+      // Note how we append the worker id to the local rpc urls.
+      http: [`http://127.0.0.1:${port}/${pool}`],
+      webSocket: [`ws://127.0.0.1:${port}/${pool}`],
+    },
+  },
+}
+
+export const chains = {
+  anvil: {
+    ...forkChain,
+    id: chainId,
+  },
+  anvilTwo: {
+    ...forkChain,
+    id: chainId + 1,
+  },
+} as const satisfies Record<string, Chain>
 
 export let forkUrl: string
 if (process.env.VITE_ANVIL_FORK_URL) forkUrl = process.env.VITE_ANVIL_FORK_URL
