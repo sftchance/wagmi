@@ -1,22 +1,24 @@
 import { createTestClient, http } from 'viem'
 
 import { createConfig } from '../src/index.js'
-import { chains } from './constants.js'
+import { testChains } from './constants.js'
+
+const { anvil, anvilTwo } = testChains
 
 export const testClient = createTestClient({
-  chain: chains.anvil,
+  chain: anvil,
   mode: 'anvil',
   transport: http(),
 })
 
 export const config = createConfig({
-  chains: [chains.anvil, chains.anvilTwo],
+  chains: [anvil, anvilTwo],
   connectors: [],
   pollingInterval: 100,
   reconnectOnMount: false,
   storage: null,
   transports: {
-    [chains.anvil.id]: http(),
-    [chains.anvilTwo.id]: http(),
+    [anvil.id]: http(),
+    [anvilTwo.id]: http(),
   },
 })

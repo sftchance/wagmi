@@ -11,13 +11,15 @@ import * as React from 'react'
 import { createTestClient, http } from 'viem'
 
 import { WagmiConfig } from '../src/index.js'
-import { chains } from './constants.js'
+import { testChains } from './constants.js'
+
+const { anvil, anvilTwo } = testChains
 
 ////////////////////////////////////////////////////////////////////////////////
 // anvil.js
 
 export const testClient = createTestClient({
-  chain: chains.anvil,
+  chain: anvil,
   mode: 'anvil',
   transport: http(),
 })
@@ -26,13 +28,13 @@ export const testClient = createTestClient({
 // config
 
 export const config = createConfig({
-  chains: [chains.anvil, chains.anvilTwo],
+  chains: [anvil, anvilTwo],
   connectors: [],
   reconnectOnMount: false,
   storage: null,
   transports: {
-    [chains.anvil.id]: http(),
-    [chains.anvilTwo.id]: http(),
+    [anvil.id]: http(),
+    [anvilTwo.id]: http(),
   },
 })
 

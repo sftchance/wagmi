@@ -1,7 +1,6 @@
 import { describe, expect, test } from 'vitest'
 
-import { chainId } from '../../test/constants.js'
-import { config, testClient } from '../../test/index.js'
+import { config, testChains, testClient } from '../../test/index.js'
 import {
   getBlockNumber,
   getBlockNumberQueryOptions,
@@ -53,7 +52,7 @@ describe('getBlockNumberQueryOptions', () => {
     `)
 
     expect(
-      getBlockNumberQueryOptions(config, { chainId }),
+      getBlockNumberQueryOptions(config, { chainId: testChains.anvil.id }),
     ).toMatchInlineSnapshot(`
       {
         "gcTime": 0,
@@ -70,7 +69,9 @@ describe('getBlockNumberQueryOptions', () => {
 
   test('queryFn', async () => {
     expect(
-      getBlockNumberQueryOptions(config, { chainId }).queryFn(),
+      getBlockNumberQueryOptions(config, {
+        chainId: testChains.anvil.id,
+      }).queryFn(),
     ).toBeDefined()
   })
 })
