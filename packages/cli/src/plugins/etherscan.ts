@@ -5,6 +5,7 @@ const apiUrls = {
   // Ethereum
   [1]: 'https://api.etherscan.io/api',
   [5]: 'https://api-goerli.etherscan.io/api',
+  [11155111]: 'https://api-sepolia.etherscan.io/api',
   // Optimism
   [10]: 'https://api-optimistic.etherscan.io/api',
   [69]: 'https://api-goerli-optimistic.etherscan.io/api',
@@ -36,7 +37,7 @@ type EtherscanConfig<TChainId extends number> = {
   /**
    * Etherscan API key.
    *
-   * API keys are specific per network and include testnets (e.g. Ethereum Mainnet and Goerli share same API key). Create or manage keys:
+   * API keys are specific per network and include testnets (e.g. Ethereum Mainnet and Goerli, and Sepolia, share same API key). Create or manage keys:
    * - [__Ethereum__](https://etherscan.io/myapikey)
    * - [__Arbitrum__](https://arbiscan.io/myapikey)
    * - [__Avalanche__](https://snowtrace.io/myapikey)
